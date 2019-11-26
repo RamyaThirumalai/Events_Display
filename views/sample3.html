@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<style>
+				.customers {
+				  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+				  border-collapse: collapse;
+				  width: 100%;
+				}
+				
+				.customers td, #customers th {
+				  border: 1px solid #ddd;
+				  padding: 8px;
+				}
+				
+				.customers tr:nth-child(even){background-color: #f2f2f2;}
+				
+				.customers tr:hover {background-color: #ddd;}
+				
+				.customers th {
+				  padding-top: 12px;
+				  padding-bottom: 12px;
+				  text-align: left;
+				  background-color: #4CAF50;
+				  color: white;
+				}
+				</style>	
+<title>JavaScript - read JSON from URL</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+		<table class="customers" id ="mytb">
+				<tr>
+				  <th>Company</th>
+				  <th>Contact</th>
+				  <th>Country</th>
+				</tr>
+		
+	<script>
+	
+		
+    $.getJSON('https://api.github.com/users', function(data) {
+        
+        
+		var results = data;
+		console.log(results.length);
+		
+		for(var i = 0; i < results.length; i++) {
+			var obj = results[i];
+			var login = obj.login;
+			var id = obj.id;
+			var type = obj.type;
+			let tableRef = document.getElementById("mytb");
+			let newRow = tableRef.insertRow(-1);
+			let newCell = newRow.insertCell(0);
+			let newCel2 = newRow.insertCell(1);
+			let newCel3 = newRow.insertCell(2);
+			let Cell1 = document.createTextNode(login);
+			let Cell2 = document.createTextNode(id);
+			let Cell3 = document.createTextNode(type);		
+			newCell.appendChild(Cell1);
+			newCel2.appendChild(Cell2);
+			newCel3.appendChild(Cell3);	
+			
+			console.log("Login Name:" +obj.login);
+			}});
+    </script>
+</body>
+</html>
