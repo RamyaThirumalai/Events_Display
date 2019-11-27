@@ -95,6 +95,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/pagecount', function (req, res) {
+  res.setHeader("Access-Control-Allow-Credentials", "*");
   res.render('sample3.html');
 });
 
