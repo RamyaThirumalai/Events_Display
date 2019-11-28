@@ -73,31 +73,25 @@ var initDb = function(callback) {
   });
 };
 
+//dashboard Page
 app.get('/', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
-  if (!db) {
-    initDb(function(err){});
-  }
-  if (db) {
-    var col = db.collection('counts');
-    // Create a document with request IP and current time of request
-    col.insert({ip: req.ip, date: Date.now()});
-    col.count(function(err, count){
-      if (err) {
-        console.log('Error running count. Message:\n'+err);
-      }
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
-    });
-  } else {
-    res.render('index.html', { pageCountMessage : null});
-  }
+  res.send("hello")
 });
 
-app.get('/pagecount', function (req, res) {
+//Display Events
+app.get('/events', function (req, res) {
   res.setHeader("Access-Control-Allow-Credentials", "*");
-  res.render('sample3.html');
+  res.render('events.html');
 });
+
+//Login Page
+app.get('/login', function (req, res) {
+  res.setHeader("Access-Control-Allow-Credentials", "*");
+  res.render('login.html');
+});
+
+//Login Validation
+
 
 // error handling
 app.use(function(err, req, res, next){
@@ -109,7 +103,7 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
-app.listen(port, ip);
+app.listen(8000, "localhost");
 console.log('Server running on http://%s:%s', ip, port);
 
 module.exports = app ;
