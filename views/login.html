@@ -27,21 +27,7 @@
   ></script>
 
   <!-- Include JS File Here -->
-<script type = "text/javascript">  
-  function validate(){
-    if(document.getElementById("email").value == "tramya1095@gmail.com"
-    && document.getElementById("password").value == "ramya")
-    {
-        alert("Validation Successfull")
-        location.href = "events.html";
-    }
-    else{
-      
-      alert("Validation Failed");
-      location.href = "login.html";
-    }
-  }
-</script>
+
 
   </head>
   <body>
@@ -50,13 +36,13 @@
           <div class="card card-body">
             <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login</h1>
            
-            <form id="form_id"  name="myform">
+            <form action="/login" method="POST">
               <div class="form-group">
-                <label for="email">Email</label>
+                <label for="userName">UserName</label>
                 <input
                   type="text"
-                  id="email"
-                  name="email"
+                  id="userName"
+                  name="userName"
                   class="form-control"
                   placeholder="Enter Email"
                 />
@@ -71,7 +57,7 @@
                   placeholder="Enter Password"
                 />
               </div>
-              <button type="submit" class="btn btn-primary btn-block" onclick="javascript:validate()">Login</button>
+              <button type="submit" class="btn btn-primary btn-block" >Login</button>
             </form>
             
           </div>

@@ -2,10 +2,15 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
-    
+
+
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
+
+// Express body parser
+app.use(express.urlencoded({ extended: true }));
+
 app.use(morgan('combined'))
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
@@ -84,14 +89,63 @@ app.get('/events', function (req, res) {
   res.render('events.html');
 });
 
+//adding New Events
+app.get('/addNewEvents', function (req, res) {
+  res.setHeader("Access-Control-Allow-Credentials", "*");
+  res.render('addNewEvents.html');
+});
+
 //Login Page
 app.get('/login', function (req, res) {
   res.setHeader("Access-Control-Allow-Credentials", "*");
   res.render('login.html');
+ 
 });
 
-//Login Validation
 
+//Login Validation
+app.post('/login', function (req, res) {
+  const userName = req.body.userName;
+  const password = req.body.password
+  
+  if (userName == "RamyaThiru" && password == "ramya") {
+    res.render("dashboard.html");
+  }
+  else{
+    console.log("validation Error");
+    res.render('login.html')
+  }
+});
+
+//Adding new Events
+app.post('/addNewEvents', function (req, res) {
+  const reqobj = {
+    id : req.body.id,
+    organizationId : req.body.organizationId,
+    departmentId : req.body.departmentId,
+    employeeName : req.body.employeeName,
+    eventName : req.body.eventName,
+    date : req.body.date
+  }
+  
+  const fetch = require("node-fetch");
+  return fetch('http://employee-events-employee-events.192.168.99.105.nip.io/employee/', {
+    method: 'POST',
+    body: reqobj,
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': '*'
+    }
+}).then(() => res.send("Succesfuully Posted"))
+.catch(err => console.log(err));
+});
+
+//cancel
+app.get('/cancel', function (req, res) {
+  
+  res.render('dashboard.html');
+ 
+});
 
 // error handling
 app.use(function(err, req, res, next){
@@ -103,7 +157,7 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
-app.listen(8000, "localhost");
+app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
 module.exports = app ;
