@@ -127,11 +127,18 @@ app.post('/addNewEvents', function (req, res) {
     eventName : req.body.eventName,
     date : req.body.date
   }
-  
+  console.log("Response which is send" +reqobj);
   const fetch = require("node-fetch");
   return fetch('http://employee-events-employee-events.192.168.99.105.nip.io/employee/', {
     method: 'POST',
-    body: reqobj,
+    body: JSON.stringify({
+      id : req.body.id,
+      organizationId : req.body.organizationId,
+      departmentId : req.body.departmentId,
+      employeeName : req.body.employeeName,
+      eventName : req.body.eventName,
+      date : req.body.date
+    }),
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': '*'
@@ -141,7 +148,7 @@ app.post('/addNewEvents', function (req, res) {
 });
 
 //cancel
-app.get('/cancel', function (req, res) {
+app.get('/dashboard', function (req, res) {
   
   res.render('dashboard.html');
  
