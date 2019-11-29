@@ -2,6 +2,7 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
+    var cors = require("cors");
 
 
 Object.assign=require('object-assign')
@@ -10,6 +11,7 @@ app.engine('html', require('ejs').renderFile);
 
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
+app.use(cors()); 
 
 app.use(morgan('combined'))
 
