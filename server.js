@@ -161,6 +161,7 @@ app.get('/dashboard', function (req, res) {
  
 });
 
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
@@ -171,7 +172,7 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
-app.listen(3000, "localhost");
+app.listen(port,ip);
 console.log('Server running on http://%s:%s', ip, port);
 
 module.exports = app ;
