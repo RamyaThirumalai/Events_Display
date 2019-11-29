@@ -13,9 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(morgan('combined'))
 
+const url_env = process.env.HTTP_TEST_SERVER;
+
  var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    url = process.env.APP_URL
+   
      mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
 
@@ -136,7 +138,7 @@ app.post('/addNewEvents', function (req, res) {
   }
   console.log("Response which is send" +reqobj);
   const fetch = require("node-fetch");
-  return fetch('http://employee-events-employee-events.192.168.99.105.nip.io/employee/', {
+  return fetch(url_env, {
     method: 'POST',
     body: JSON.stringify({
       id : req.body.id,
