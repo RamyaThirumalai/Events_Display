@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="https://bootswatch.com/4/journal/bootstrap.min.css"
     />
-    <title>Node.js & Passport Login App</title>
+    <title>Event Planner</title>
     <script
     src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -27,6 +27,17 @@
     crossorigin="anonymous"
   ></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<style>
+.wrapper {
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+</style>
 </head>
 
 <body>
@@ -43,10 +54,15 @@
 				  <th>Event Name</th>
 				  <th>Event Date</th>
 				</tr>
-		
+	</table>
+	<div class="row mt-5">
+			<div style=" padding-left: 300px;" class="col-md-6 m-auto">
+					<a href="/dashboard" class="btn btn-secondary">Back</a></br>
+			 </div>
+	</div>	
 	<script>
 	
-		
+	
     $.getJSON('http://employee-events-employee-events.192.168.99.105.nip.io/employee/', function(data) {
         
         

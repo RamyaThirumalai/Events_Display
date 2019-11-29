@@ -13,10 +13,17 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(morgan('combined'))
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
+    url = process.env.APP_URL
+     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
+
+console.log(process.env.PORT );
+console.log(process.env.OPENSHIFT_NODEJS_PORT);
+console.log(process.env.IP);
+console.log(process.env.OPENSHIFT_NODEJS_IP );
+
 
 if (mongoURL == null) {
   var mongoHost, mongoPort, mongoDatabase, mongoPassword, mongoUser;
@@ -80,7 +87,7 @@ var initDb = function(callback) {
 
 //dashboard Page
 app.get('/', function (req, res) {
-  res.send("hello")
+  res.render("welcome.html")
 });
 
 //Display Events
