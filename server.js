@@ -150,7 +150,7 @@ app.post('/addNewEvents', function (req, res) {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': '*'
     }
-}).then(() => res.send("Succesfuully Posted"))
+}).then(() => res.render("dashboard.html"))
 .catch(err => console.log(err));
 });
 
@@ -171,7 +171,7 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
-app.listen(port, ip);
+app.listen(3000, "localhost");
 console.log('Server running on http://%s:%s', ip, port);
 
 module.exports = app ;
