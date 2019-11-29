@@ -152,7 +152,7 @@ app.post('/addNewEvents', function (req, res) {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': '*'
     }
-}).then(() => res.render("dashboard.html"))
+}).then(() => res.render("events.html"))
 .catch(err => console.log(err));
 });
 
